@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureShaper</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body class="bg-light-grey font-plusJakarta">
+    <header class="md:px-12 sm:px-6 px-2">
+        <nav class="pt-8" x-data="{ open: false }">
+            <div class="max-w-[945px] relative mx-auto bg-white rounded-2xl ps-4 pe-2 py-2">
+                <div class="flex items-center justify-between">
+                    <h1>nav-logo</h1>
+                    <div class="md:hidden absolute end-3">
+                        <button @click="open = !open" class="text-grey relative z-40 focus:outline-none">
+                            <svg x-show="!open" class="w-6 md:w-8 h-6 md:h-8" fill="none" stroke="#A18EE8"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16m-7 6h7"></path>
+                            </svg>
+                            <svg x-show="open" class="w-6 md:w-8 h-6 md:h-8" fill="none" stroke="#A18EE8"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <ul x-show="open" @click.away="open = false" x-transition
+                        class="items-center mx-auto text-center gap-6 xl:gap-2 md:flex flex-col md:flex-row md:static absolute top-16 left-0 w-full md:w-auto bg-white md:bg-transparent rounded-lg md:rounded-none p-4 md:p-0 shadow-lg md:shadow-none md:flex">
+                        <li class="mb-4 md:mb-0"><a
+                                class="text-grey px-4 py-3 relative before:absolute before:w-0 before:h-[2px] before:bottom-2 before:duration-300 duration-300 hover:text-purple before:start-1/2 before:-translate-x-1/2 before:bg-purple hover:before:w-1/2 max-w-[303px] sm:max-w-full text-sm font-bold opacity-70"
+                                href="#missin">Missions </a></li>
+                        <li class="mb-4 md:mb-0"><a
+                                class="text-grey px-4 py-3 relative before:absolute before:w-0 before:h-[2px] before:bottom-2 before:duration-300 duration-300 hover:text-purple before:start-1/2 before:-translate-x-1/2 before:bg-purple hover:before:w-1/2 max-w-[303px] sm:max-w-full text-sm font-bold opacity-70"
+                                href="#team">Teams</a></li>
+                        <li class="mb-4 md:mb-0"><a
+                                class="text-grey px-4 py-3 relative before:absolute before:w-0 before:h-[2px] before:bottom-2 before:duration-300 duration-300 hover:text-purple before:start-1/2 before:-translate-x-1/2 before:bg-purple hover:before:w-1/2 max-w-[303px] sm:max-w-full text-sm font-bold opacity-70"
+                                href="#jobs">Jobs </a></li>
+                        <li class="mb-4 md:mb-0"><a
+                                class="text-grey px-4 py-3 relative before:absolute before:w-0 before:h-[2px] before:bottom-2 before:duration-300 duration-300 hover:text-purple before:start-1/2 before:-translate-x-1/2 before:bg-purple hover:before:w-1/2 max-w-[303px] sm:max-w-full text-sm font-bold opacity-70"
+                                href="#stories">Stories</a></li>
+                        <button
+                            class="text-white font-bold flex justify-center mx-auto text-sm block md:hidden bg-purple py-3 px-3.5 rounded-lg">Join
+                            Now</button>
+                    </ul>
+                    <div class="flex items-center gap-2 ">
+                        <button class="text-purple font-bold text-sm absolute right-[13%] py-3 px-3.5 rounded-lg">Sign
+                            in</button>
+                        <button
+                            class="text-white font-bold text-sm md:block hidden bg-purple py-3 px-3.5 rounded-lg">Join
+                            Now</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="md:pt-[114px] px-12 pt-24 pb-16">
+            <h1 class="text-5xl lg:text-8xl mb-16 text-grey max-w-[1255px]  font-normal leading-126 md:leading-110">
+                Find <span class="font-bold text-purple">your mission</span> and join the right team to make it happen
+            </h1>
+            <button class="text-white font-bold text-base leading-100 bg-purple py-[17px] px-7 rounded-lg ">
+                Get Started</button>
+        </div>
+    </header>
+    <!-- ---------claim cards---------- -->
+    <div class="px-4 md:px-12">
+        <div x-data="cardsComponent" class="relative">
+            <div class="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <template x-for="card in cards" class="max-sm:absolute top-[20%]" :key="card.title">
+                    <div
+                        :class="`md:col-span-2 rounded-2xl flex flex-col justify-between max-w-full md:max-w-[447px] p-8 ${card.bgColor} min-h-[355px]`">
+                        <p class="text-base font-bold  leading-100" :class="card.textColor" x-html="card.category"></p>
+                        <p class="text-5xl font-bold  mt-24 mb-8" :class="card.textColor" x-html="card.title"></p>
+                        <div class="flex space-x-2 justify-between">
+                            <button class="px-4 py-2 font-bold rounded" :class="card.textColor">Follow</button>
+                            <template x-if="card.hasMission">
+                                <button class="px-4 py-2 font-bold rounded border"
+                                    :class="card.textColor , card.border">Claim Mission</button>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!-- ---------Team Profile---------- -->
+    <div class="px-4 md:pb-8 lg:px-12 text-center mx-auto md:pb-16 pb-8 pt-16">
+        <h1
+            class="text-grey mb-8  leading-125 lg:leading-100 tracking-tighter font-bold text-custom-3xl md:text-5xl lg:text-custom-5xl">
+            Your own team profile on Futureshaper.com
+        </h1>
+        <p class="max-w-[890px] text-xl mx-auto  text-grey font-normal  leading-140 mb-8">Lorem ipsum
+            dolor sit
+            amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
+            sociis natoque penatibus et magnis dis parturient montes.</p>
+        <button class="text-white font-bold text-base leading-100 bg-purple py-[17px] px-7 rounded-lg ">
+            Create your team profile</button>
+    </div>
+    <!-- ---------Neue Jobs---------- -->
+    <div class="container px-4 xl:px-0 !max-w-[1344px] mx-auto" x-data="jobCards">
+        <div class="flex justify-between py-8">
+            <h1 class="text-2xl text-grey font-bold">Neue Jobs</h1>
+            <a href="#" class="bg-purple py-3 px-3.5 rounded-md text-white text-sm leading-100 h-full">Publish a job</a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 pb-8">
+            <template x-for="job in jobs" :key="job.id">
+                <div class="bg-white rounded-lg shadow p-4 lg:p-8">
+                    <div class="flex items-center mb-4">
+                        <img :src="job.logo" alt="Logo" class="w-10 h-10 mr-3">
+                        <h2 class="text-lg font-semibold text-purple" x-text="job.company"></h2>
+                    </div>
+                    <div class="flex space-x-2 mb-4">
+                        <template x-for="tag in job.tags" :key="tag">
+                            <span :class="`bg-${tag.color} text-${tag.textColor} text-xs font-bold mr-2 p-2 rounded-full`" x-text="tag.label"></span>
+                        </template>
+                    </div>
+                    <h3 class="text-2xl leading-133 font-bold mb-6 text-grey" x-text="job.title"></h3>
+                    <p class="text-grey mb-6 leading-140 text-base" x-text="job.description"></p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <template x-for="type in job.types" :key="type">
+                            <span class="bg-light-grey text-grey text-xs font-medium mr-2 p-2 rounded" x-text="type"></span>
+                        </template>
+                    </div>
+                    <div class="flex justify-between">
+                        <div>
+                            <p class="text-grey font-bold mb-0 leading-150 text-sm" x-text="job.salary"></p>
+                            <p class="text-grey mb-0 text-sm leading-150" x-text="job.location"></p>
+                        </div>
+                        <p class="text-grey text-sm leading-171" x-text="job.posted"></p>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+    <!-- --------- Footer ---------- -->
+    <footer class="px-8 md:px-12 pt-12 bg-white">
+        <div class="container mx-auto">
+            <div class="row flex flex-wrap flex-row">
+                <div class="w-full md:w-5/12 xl:w-1/2">
+                    <h1 class="text-5xl max-sm:mx-auto max-sm:text-center ">Footer Logo</h1>
+                </div>
+                <div class="w-full md:w-7/12 xl:w-1/2 pt-4 pb-8">
+                    <div class="flex flex-row max-lg:pt-10 flex-wrap sm:flex-nowrap">
+                        <div class="w-full flex max-sm:justify-center flex-col max-sm:items-center xs:w-1/2 sm:w-1/3">
+                            <p class="text-grey text-base font-bold  mb-4">Navigation</p>
+                            <ul class="">
+                                <li class="mb-4 text-center sm:text-start">
+                                    <a href="" class="text-base  font-normal text-gray">Home</a>
+                                </li>
+                                <li class="mb-4 text-center sm:text-start">
+                                    <a href="" class="text-base  font-normal text-gray">About Us</a>
+                                </li>
+                                <li class="mb-4 text-center sm:text-start">
+                                    <a href="" class="text-base  font-normal text-gray">Features</a>
+                                </li>
+                                <li class="mb-4 text-center sm:text-start">
+                                    <a href="" class="text-base  font-normal text-gray">Blog</a>
+                                </li>
+                                <li class="mb-4 text-center sm:text-start">
+                                    <a href="" class="text-base  font-normal text-gray">Contact Us</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div
+                            class="w-full flex max-sm:justify-center flex-col max-sm:items-center sm:w-1/2 sm:w-1/3 max-sm:pt-8">
+                            <p class="text-grey text-base font-bold  mb-4">Services</p>
+                            <ul class="">
+                                <li class="mb-4 text-center sm:text-start">
+                                    <a href="" class="text-base  font-normal text-gray">Pricing</a>
+                                </li>
+                                <li class="mb-4 text-center sm:text-start">
+                                    <a href="" class="text-base  font-normal text-gray">Terms &
+                                        Conditions</a>
+                                </li>
+                                <li class="mb-4 text-center sm:text-start">
+                                    <a href="" class="text-base  font-normal text-gray">Privacy</a>
+                                </li>
+                                <li class="mb-4 text-center sm:text-start">
+                                    <a href="" class="text-base  font-normal text-gray">Community</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div
+                            class="w-full flex max-sm:justify-center flex-col items-center xs:w-1/2 sm:w-1/3 max-sm:pt-8">
+                            <p class="text-grey text-base font-bold  mb-4">language</p>
+                            <p>Dropdown</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="border-t flex flex-col sm:flex-row justify-between items-center border-primary-grey ">
+                <p class="sm:py-12 py-6 text-base font-normal  leading-140 text-grey">ⓒ Copyright
+                    futureshaper.com 2024</p>
+                <div class="flex items-center pb-8 sm:pb-0 gap-4">
+                    <a href="" class="text-sm  font-bold leading-171 text-purple">Linkdin</a>
+                    <a href="" class="text-sm  font-bold leading-171 text-purple">X</a>
+                    <a href="" class="text-sm  font-bold leading-171 text-purple">Xing</a>
+                    <a href="" class="text-sm  font-bold leading-171 text-purple">Instagram</a>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <script src="./assets/js/tailwind.config.js"></script>
+    <script>
+        function cardsComponent() {
+            return {
+                cards: [
+                    { category: 'Environment', title: 'Climate <br /> Protection', bgColor: 'bg-yellow', textColor: 'text-purple', buttonBg: 'white', hasMission: false },
+                    { category: 'Wissenschaft', title: 'Cure<br /> Cancer', bgColor: 'bg-pink', textColor: 'text-white', buttonBg: 'transparent', hasMission: true },
+                    { category: 'Society', title: 'Animal <br /> Welfare', bgColor: 'bg-skin', textColor: 'text-white', buttonBg: 'transparent', hasMission: true },
+                    { category: 'Social Affairs', title: 'Strengthen <br /> Democracy', bgColor: 'bg-sky', textColor: 'text-purple', buttonBg: 'white', hasMission: true },
+                    { category: 'Technology', title: 'Colonize <br /> Space', bgColor: 'bg-purple', textColor: 'text-white', buttonBg: 'transparent', hasMission: true },
+                    { category: 'Environment', title: 'Sustainable <br /> Fashion', bgColor: 'bg-yellow', textColor: 'text-purple', buttonBg: 'white', border: 'yellow', hasMission: true }
+                ]
+            };
+        }
+    </script>
+       <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('jobCards', () => ({
+                jobs: [
+                    {
+                        id: 1,
+                        logo: '',
+                        company: 'Montag Stiftung Jugend und Gesellschaft',
+                        tags: [
+                            {label: 'Equality', color: 'sky', textColor: 'purple'},
+                            {label: 'Climate Protection', color: 'skin', textColor: 'white'},
+                        ],
+                        title: 'Technische Projektmanager*in',
+                        description: 'Sind auch Sie begeistert von gesellschaftlicher Transformation und wollen sich mit Ihrer Expertise aktiv dafür einsetzen, die Städte der Zukunft inklusiv und nachhaltig zu gestalten?',
+                        types: ['Full Time', 'Paid Job', 'Full Remote'],
+                        salary: '50.000 - 80.000 €',
+                        location: 'Berlin, Germany',
+                        posted: '3h ago'
+                    },
+                    {
+                        id: 2,
+                        logo: '',
+                        company: 'Eat the World GmbH',
+                        tags: [
+                            {label: 'Equality', color: 'sky', textColor: 'purple'},
+                        ],
+                        title: 'Customer Relations Manager*in',
+                        description: 'Eat the World - das sind besondere Stadterlebnisse in mehr als 50 Städten in Deutschland. Mit der Marke Eat the World sind wir Marktführer bei kulinarisch-kulturellen Stadtführungen.',
+                        types: ['Full Time', 'Paid Job', 'Full Remote'],
+                        salary: '50.000 - 80.000 €',
+                        location: 'Berlin, Germany',
+                        posted: '3h ago'
+                    },
+                    {
+                        id: 3,
+                        logo: '',
+                        company: 'Intercultures',
+                        tags: [
+                            {label: 'Equality', color: 'sky', textColor: 'purple'},
+                            {label: 'Environment', color: 'yellow', textColor: 'purple'},
+                            {label: 'Climate Protection', color: 'skin', textColor: 'white'},
+                        ],
+                        title: 'Werkstudent*in Personal- und Organisationsentwicklung',
+                        description: 'Für unser Berliner Head Office Team suchen wir ab Oktober 2024 eine*n motivierten Werkstudent*in zur Unterstützung bei der Planung, Organisation und Koordination diverser interkultureller und an...',
+                        types: ['Full Time', 'Paid Job', 'Full Remote'],
+                        salary: '50.000 - 80.000 €',
+                        location: 'Berlin, Germany',
+                        posted: '3h ago'
+                    },
+                    {
+                        id: 4,
+                        logo: '',
+                        company: 'FundraisingBox - Wikando GmbH',
+                        tags: [
+                            {label: 'Equality', color: 'sky', textColor: 'purple'},
+                            {label: 'Climate Protection', color: 'skin', textColor: 'white'},
+                        ],
+                        title: 'Legal & Compliance Manager*in',
+                        description: 'Wir digitalisieren den Spenden-Markt! Mit unserer cloudbasierten FundraisingBox bieten wir gemeinnützigen Organisationen viele Möglichkeiten ihre Spenden digital zu sammeln...',
+                        types: ['Full Time', 'Paid Job', 'Full Remote'],
+                        salary: '50.000 - 80.000 €',
+                        location: 'Berlin, Germany',
+                        posted: '3h ago'
+                    },
+                    {
+                        id: 5,
+                        logo: '',
+                        company: 'Goethe-Institut',
+                        tags: [
+                            {label: 'No Mission VET', color: 'primary-grey', textColor: 'white'},
+                        ],
+                        title: 'Referent*in Vertrieb im Fortbildungszentrum',
+                        description: 'Wir suchen eine*n engagierte*n Kolleg*in als Elternzeitvertretung für den Zeitraum vom 01.09.2024 bis 31.08.2026.',
+                        types: ['Full Time', 'Paid Job', 'Full Remote'],
+                        salary: '50.000 - 80.000 €',
+                        location: 'Berlin, Germany',
+                        posted: '3h ago'
+                    },
+                    {
+                        id: 6,
+                        logo: '',
+                        company: 'WBK Wir bewegen Kids gemeinnützige GmbH',
+                        tags: [
+                            {label: 'Climate Protection', color: 'skin', textColor: 'white'},
+                        ],
+                        title: 'Leiter*in Finanzen und Personal',
+                        description: 'Hamburg bewegt Kids hat das Ziel, aktiv gegen den immer größer werdenden Bewegungsmangel bei Kindern vorzugehen. Unsere Vision ist es, ganz Hamburg eine neue Perspektive auf ein...',
+                        types: ['Full Time', 'Paid Job', 'Full Remote'],
+                        salary: '50.000 - 80.000 €',
+                        location: 'Berlin, Germany',
+                        posted: '3h ago'
+                    }
+                ]
+            }));
+        });
+    </script>
+</body>
+
+</html>
